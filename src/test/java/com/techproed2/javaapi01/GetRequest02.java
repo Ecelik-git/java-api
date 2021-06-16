@@ -40,7 +40,7 @@ public class GetRequest02 {
 		
 		SoftAssert softAssert = new SoftAssert();
 		
-		softAssert.assertTrue(response.asString().contains("Not Found"));
+		//softAssert.assertTrue(response.asString().contains("Not Found"));
 		System.out.println("=============");
 		softAssert.assertFalse(response.asString().contains("TechProEd"));
 		
