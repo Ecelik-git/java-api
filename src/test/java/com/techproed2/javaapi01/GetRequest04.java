@@ -1,58 +1,47 @@
 package com.techproed2.javaapi01;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.testng.asserts.SoftAssert;
-
 import static io.restassured.RestAssured.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-public class GetRequest04{
+
+public class GetRequest04 {
+
 	
-//  I send a GET request to REST API URL             https://jsonplaceholder.typicode.com/todos/23  
-//And Accept type is “application/JSON”
-//Then
-//HTTP Status Code should be 200
-//And Response format should be "application/JSON"
-//And "title" is "et itaque necessitatibus maxime molestiae qui quas velit",
-//And "completed" is false
-//And "userId" is 2
 	
+	
+	/*
+	 When 
+	 	I send a GET request to REST API URL http://dummy.restapiexample.com/api/v1/employees   
+	    And Accept type is “application/JSON”
+	 Then 
+	    HTTP Status Code should be 200
+	    And Response format should be "application/JSON"
+	    And there should be 24 employees
+	    And "Ashton Cox" should be one of the employees
+	    And 21, 61, and 23 should be among the employee ages
+*/
+
 	@Test
-	public void get03() {
-		//set url
+	public void get04() {
+		
+		//1.step set url
 		String url="http://dummy.restapiexample.com/api/v1/employees";
-		//accept data and send url
+		//2.step accepted data
 		
-		Response res = given().accept(ContentType.JSON).when().get(url);
-		res.prettyPrint();
+		//3.step send url
 		
-		//make assertion
-		res.then().assertThat().statusCode(200)
+		Response response=given().accept(ContentType.JSON).when().get(url);
+		response.prettyPrint();
+		
+		//4.step make assertion
+		
+		response.then().assertThat().statusCode(200)
 		.contentType(ContentType.JSON)
-		.body("date.id", Matchers.hasSize(24),
-		"data.employee_name", Matchers.hasItem("Ashton Cox"));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		.body("data.id", Matchers.hasSize(24),
+			"data.employee_name",Matchers.hasItem("Ashton Cox"),
+			"data.employee_age",Matchers.hasItems("21","61","23"));
 		
 		
 		
@@ -80,14 +69,4 @@ public class GetRequest04{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
-
